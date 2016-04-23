@@ -61,3 +61,8 @@ quick_gen_project_*_autogen.sh.meta
 .idea/
 *.js
 *.js.map
+
+
+//vs code file
+
+.vscode/
