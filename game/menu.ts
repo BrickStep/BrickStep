@@ -1,3 +1,7 @@
+/// <reference path="../scrpts/phaser" />
+/// <reference path="game" />
+
+
 module BrickStep {
     export class Menu extends Phaser.State {
         

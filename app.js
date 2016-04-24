@@ -12,8 +12,30 @@
 //         logo.anchor.setTo(0.5, 0.5);
 //     }
 // }
-///</// <reference path="./game/" />
+/// <reference path="game/game/"/>
+/// <reference path="scripts/require.js" />
 window.onload = function () {
     var game = new BrickStep.Game;
+    loadScripts();
 };
+function loadScripts() {
+    var directory = ['game/', 'game/main/'];
+    var extension = '.js';
+    var gamefiles = ['game', 'boot', 'menu'];
+    var mainfiles = ['normal', 'zen'];
+    for (var _i = 0, gamefiles_1 = gamefiles; _i < gamefiles_1.length; _i++) {
+        var file = gamefiles_1[_i];
+        var path = directory[0] + file + extension;
+        var script = document.createElement("script");
+        script.src = path;
+        document.body.appendChild(script);
+    }
+    for (var _a = 0, mainfiles_1 = mainfiles; _a < mainfiles_1.length; _a++) {
+        var file = mainfiles_1[_a];
+        var path = directory[1] + file + extension;
+        var script = document.createElement("script");
+        script.src = path;
+        document.body.appendChild(script);
+    }
+}
 //# sourceMappingURL=app.js.map

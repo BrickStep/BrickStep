@@ -11,8 +11,8 @@ module BrickStep {
         }
         
         private loadResouces() {
-            this.load.image('black', '../assets/image/tile_b');
-            this.load.image('white', '../assets/image/tile_w');
+            this.load.image('black', '../assets/image/tile_b.png');
+            this.load.image('white', '../assets/image/tile_w.png');
             //TODO: load resouces
             
         }
