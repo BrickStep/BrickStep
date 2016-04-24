@@ -6,6 +6,10 @@ module BrickStep {
         timeText;
         pauseText;
         v;
+        DText;
+        FText;
+        JText;
+        KText;
 
         preload() {
 
@@ -22,9 +26,12 @@ module BrickStep {
             };
             this.startTime = this.game.time.time;
             this.timeText = this.game.add.text(200, 10, '00:00:00', style);
-            //this.timeText.setShadow(1,1, 'rgba(255, 255, 255, 1)', 0);
-            this.pauseText = this.game.add.text(200, 600, 'Press Space to Start', style);
-            //this.pauseText.setShadow(1,1, 'rgba(255, 255, 255, 1)', 0);
+            this.pauseText = this.game.add.text(100, 300, 'Press Space to Start', style);
+
+            this.DText = this.game.add.text(10, 600, 'D', style);
+            this.FText = this.game.add.text(130, 600, 'F', style);
+            this.JText = this.game.add.text(250, 600, 'J', style);
+            this.KText = this.game.add.text(370, 600, 'K', style);
 
             var spaceKey = this.game.input.keyboard.addKey(
                 Phaser.Keyboard.SPACEBAR);
@@ -53,7 +60,7 @@ module BrickStep {
 
         start() {
             if (this.game.paused) {
-                this.game.paused = false
+                this.game.paused = false;
                 this.pauseText.setText('');
             } else {
                 this.game.paused = true;
