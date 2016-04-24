@@ -15,7 +15,7 @@ module BrickStep {
                 Phaser.Keyboard.SPACEBAR);
 
             this.initTiles();
-            this.timer = this.game.time.events.loop(802, this.addRowOfTiles, this);
+            this.timer = this.game.time.events.loop(780, this.addRowOfTiles, this);
 
             this.game.paused = true;
             spaceKey.onDown.add(this.start, this);
