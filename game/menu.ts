@@ -1,4 +1,4 @@
-/// <reference path="../scrpts/phaser" />
+
 /// <reference path="game" />
 
 

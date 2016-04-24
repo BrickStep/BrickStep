@@ -20,7 +20,6 @@
 // }
 
 /// <reference path="game/game/"/>
-/// <reference path="scripts/require.js" />
 
 window.onload = () => {
 

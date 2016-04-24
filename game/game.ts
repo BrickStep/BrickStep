@@ -1,4 +1,4 @@
-///<reference path="./main/" />
+
 ///<reference path="../scripts/phaser"/>
 module BrickStep {
     export class Game extends Phaser.Game {
