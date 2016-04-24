@@ -19,7 +19,8 @@
 
 // }
 
-///</// <reference path="./game/" />
+///<reference path='/game/game.ts/'/>
+
 
 window.onload = () => {
 
