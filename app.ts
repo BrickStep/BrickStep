@@ -23,7 +23,7 @@
 
 
 window.onload = () => {
-    requirejs(['game/boot','game/menu','game/game','game/main/normal','game/main/zen'], function () {
+    requirejs([ 'game/boot','game/menu','game/game','game/main/normal','game/main/zen'], function () {
         var game = new BrickStep.Game;
     })
     

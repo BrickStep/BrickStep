@@ -19,6 +19,7 @@
   "homepage": "https://github.com/BrickStep/BrickStep#readme",
   "dependencies": {
     "phaser": "^2.4.6",
+    "typescript-collections": "^1.1.2",
     "typings": "^0.8.1"
   }
 }

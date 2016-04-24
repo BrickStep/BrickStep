@@ -1,3 +1,4 @@
+
 module BrickStep {
     import Key = Phaser.Key;
     export class NormalMode extends Phaser.State {
@@ -15,19 +16,29 @@ module BrickStep {
 
         key;
 
+        BlackQueue;
+
 
 
         L1() {
-            console.log("L1 Down")
+            this.LDown(0);
         }
         L2() {
-
+            this.LDown(1);
         }
         L3() {
-
+            this.LDown(2);
         }
         L4() {
+            this.LDown(3);
+        }
 
+        LDown(index: number) {
+            let toBe = this.BlackQueue.popOne().indexInRow;
+            if (toBe != index) {
+
+                console.log("YOU LOSE At DOWN " + toBe + " not as " + index);
+            }
         }
 
         preload() {
@@ -43,8 +54,12 @@ module BrickStep {
             let L4 = this.game.input.keyboard.addKey(Phaser.Keyboard.K);
 
             this.key = new BrickStep.KEY(L1,L2,L3,L4);
-
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
+
+
+            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(100);
+
+
 
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
@@ -78,13 +93,13 @@ module BrickStep {
         initTiles() {
             // random roll a number from 0 to 3
             // the rolled number is the black tile, the others are white
-            for (var j = -1; j < 4; j++) {
+            for (var j = 3; j >= -1; j--) {
                 var black = Math.floor(Math.random() * 4);
                 for (var i = 0; i < 4; i++)
                     if (i != black) {
                         this.addWhiteTile(i * 120, j * 160, 200);
                     } else {
-                        this.addBlackTile(i * 120, j * 160, 200);
+                        this.addBlackTile(i * 120, j * 160, 200,i);
                     }
             }
         }
@@ -113,28 +128,44 @@ module BrickStep {
             this.game.physics.arcade.enable(tile);
             tile.body.velocity.y = v;
 
+            tile.checkWorldBounds = true;
+            tile.outOfBoundsKill = true;
             tile.events.onEnterBounds.add(this.destoryLisenter, tile);
         }
 
 
-        addBlackTile(x, y, v) {
+        addBlackTile(x, y, v,index:number) {
             // Create a tile at the position x and y
-            var tile = this.game.add.sprite(x, y, 'black');
-
+            let tile= new BrickStep.BlackTile(this.game,x, y, 'black');
+            this.game.add.existing(tile);
+            tile.indexInRow = index;
+            console.log(tile.indexInRow);
+            this.BlackQueue.addOne(tile);
+            tile.events.onOutOfBounds.add(this.blackTileKillListener,this);
             // Add to created group
             this.tiles.add(tile);
 
             // Add velocity to the tile to make it move
             this.game.physics.arcade.enable(tile);
             tile.body.velocity.y = v;
-
-            tile.events.onEnterBounds.add(this.destoryLisenter, tile);
+            tile.checkWorldBounds = true;
+            tile.outOfBoundsKill = true;
+           // console.log(tile.checkWorldBounds);
+            tile.events.onEnterBounds.add(this.destoryLisenter, this, 0,tile);
         }
 
         private destoryLisenter(tile) {
+            console.log("addedListener")
             // Automatically kill the pipe when it's no longer visible
-            tile.checkWorldBounds = true;
+
             tile.outOfBoundsKill = true;
+        }
+
+        private blackTileKillListener(tile) {
+            if (tile === this.BlackQueue.peekOne()){
+                console.log("YOU LOSE");
+            }
+            this.BlackQueue.popOne();
         }
 
         addRowOfTiles() {
@@ -146,7 +177,7 @@ module BrickStep {
                 if (i != black) {
                     this.addWhiteTile(i * 120, -160, this.v);
                 } else {
-                    this.addBlackTile(i * 120, -160, this.v);
+                    this.addBlackTile(i * 120, -160, this.v,i);
                 }
         }
 

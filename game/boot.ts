@@ -1,4 +1,3 @@
-
 module BrickStep {
 
     export class KEY {
@@ -31,6 +30,60 @@ module BrickStep {
             this.L[2].onDown.add(f3,that);
             this.L[3].onDown.add(f4,that);
 
+        }
+    }
+
+    export class Queue<T> {
+        //this queue is unreliable due to limited capacity
+        queue: Array<T>;
+        index: number;
+        max: number;
+        toExact: number;
+        cap: number;
+        constructor(max: number) {
+            this.max = max;
+            this.index = 0;
+            this.cap = 0;
+            this.toExact = 0;
+            this.queue = new Array(max);
+        }
+        addOne(toAdd: T) {
+            console.log(toAdd)
+            this.index = this.index % this.max;
+            if (++this.cap < this.max) {
+                this.queue[this.index++] = toAdd;
+                this.cap++;
+            } else {
+                console.error("queue overflow")
+            }
+        }
+        peekOne() : T {
+            if (this.cap > 0) {
+                //console.log(this.queue[this.toExact])
+                return this.queue[this.toExact];
+            } else {
+                console.error("queue underflow")
+            }
+
+        }
+        popOne() : T {
+            if (this.toExact >= this.max)
+                this.toExact = this.toExact % this.max;
+            if (this.cap > 0) {
+                this.cap--;
+                return this.queue[this.toExact++];
+            } else {
+                console.error("queue underflow")
+            }
+        }
+
+
+    }
+    
+    export class BlackTile extends Phaser.Sprite {
+        indexInRow: number;
+        constructor(game,x,y,key) {
+            super(game, x, y, key);
         }
     }
     
