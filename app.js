@@ -12,29 +12,32 @@
 //         logo.anchor.setTo(0.5, 0.5);
 //     }
 // }
-/// <reference path="game/game/"/>
+/// <reference path="game/game.ts"/>
+/// <reference path="scripts/require.js" />
 window.onload = function () {
-    var game = new BrickStep.Game;
-    loadScripts();
+    requirejs(['game/boot', 'game/menu', 'game/game', 'game/main/normal', 'game/main/zen'], function () {
+        var game = new BrickStep.Game;
+    });
 };
-function loadScripts() {
+function loadS() {
     var directory = ['game/', 'game/main/'];
     var extension = '.js';
-    var gamefiles = ['game', 'boot', 'menu'];
+    var gamefiles = ['boot', 'menu', 'game'];
     var mainfiles = ['normal', 'zen'];
-    for (var _i = 0, gamefiles_1 = gamefiles; _i < gamefiles_1.length; _i++) {
-        var file = gamefiles_1[_i];
-        var path = directory[0] + file + extension;
-        var script = document.createElement("script");
-        script.src = path;
-        document.body.appendChild(script);
-    }
-    for (var _a = 0, mainfiles_1 = mainfiles; _a < mainfiles_1.length; _a++) {
-        var file = mainfiles_1[_a];
+    for (var _i = 0, mainfiles_1 = mainfiles; _i < mainfiles_1.length; _i++) {
+        var file = mainfiles_1[_i];
         var path = directory[1] + file + extension;
         var script = document.createElement("script");
         script.src = path;
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     }
+    for (var _a = 0, gamefiles_1 = gamefiles; _a < gamefiles_1.length; _a++) {
+        var file = gamefiles_1[_a];
+        var path = directory[0] + file + extension;
+        var script = document.createElement("script");
+        script.src = path;
+        document.head.appendChild(script);
+    }
+    var game = new BrickStep.Game;
 }
 //# sourceMappingURL=app.js.map

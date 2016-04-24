@@ -8,8 +8,24 @@ module BrickStep {
         }
 
         create() {
+            this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
+            this.initTiles();
             this.timer = this.game.time.events.loop(800, this.addRowOfTiles, this);
+        }
+
+        initTiles() {
+            // random roll a number from 0 to 3
+            // the rolled number is the black tile, the others are white
+            for (var j = - 1; j < 4; j++) {
+                var black = Math.floor(Math.random() * 4);
+                for (var i = 0; i < 4; i++)
+                    if (i != black) {
+                        this.addWhiteTile(i * 120, j * 160);
+                    } else {
+                        this.addBlackTile(i * 120, j * 160);
+                    }
+            }
         }
 
         addWhiteTile(x, y) {
@@ -24,7 +40,7 @@ module BrickStep {
             this.game.physics.arcade.enable(tile);
             tile.body.velocity.y = 200;
 
-            //tile.events.onEnterBounds.add(this.destoryLisenter, tile);
+            tile.events.onEnterBounds.add(this.destoryLisenter, tile);
         }
 
 
@@ -55,9 +71,9 @@ module BrickStep {
             // the rolled number is the black tile, the others are white
             for (var i = 0; i < 4; i++)
                 if (i != black) {
-                    this.addWhiteTile(i * 120, -200);
+                    this.addWhiteTile(i * 120, -160);
                 } else {
-                    this.addBlackTile(i * 120, -200);
+                    this.addBlackTile(i * 120, -160);
                 }
         }
 
