@@ -13,15 +13,12 @@ module BrickStep {
         KText;
         maxTime;
 
-        KEY: {
-            L1 : Phaser.Key,
-            L2 : Phaser.Key,
-            L3 : Phaser.Key,
-            L4 : Phaser.Key
-        }
+        key;
+
+
 
         L1() {
-
+            console.log("L1 Down")
         }
         L2() {
 
@@ -34,14 +31,21 @@ module BrickStep {
         }
 
         preload() {
-            this.KEY.L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
-            this.KEY.L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
-            this.KEY.L3 = this.game.input.keyboard.addKey(Phaser.Keyboard.J);
-            this.KEY.L4 = this.game.input.keyboard.addKey(Phaser.Keyboard.K);
 
         }
 
         create() {
+
+
+            let L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
+            let L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
+            let L3 = this.game.input.keyboard.addKey(Phaser.Keyboard.J);
+            let L4 = this.game.input.keyboard.addKey(Phaser.Keyboard.K);
+
+            this.key = new BrickStep.KEY(L1,L2,L3,L4);
+
+            this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
+
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
 
@@ -89,9 +93,11 @@ module BrickStep {
             if (this.game.paused) {
                 this.game.paused = false;
                 this.pauseText.setText('');
+                this.key.enableAll(this.game);
             } else {
                 this.game.paused = true;
                 this.pauseText.setText('Press Space to Start');
+                this.key.disableAll(this.game);
             }
         }
 
