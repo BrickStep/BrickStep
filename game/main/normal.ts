@@ -2,8 +2,10 @@ module BrickStep {
     export class NormalMode extends Phaser.State {
         tiles;
         timer;
-        starttime;
+        startTime;
         timeText;
+        pauseText;
+        v;
 
         preload() {
 
@@ -16,15 +18,19 @@ module BrickStep {
             var style = {
                 font: "32px Futura condensed",
                 align: "center",
-                fill: "#000000",
+                fill: "#3d3d3d"
             };
-            this.starttime = this.game.time.time;
+            this.startTime = this.game.time.time;
             this.timeText = this.game.add.text(200, 10, '00:00:00', style);
+            //this.timeText.setShadow(1,1, 'rgba(255, 255, 255, 1)', 0);
+            this.pauseText = this.game.add.text(200, 600, 'Press Space to Start', style);
+            //this.pauseText.setShadow(1,1, 'rgba(255, 255, 255, 1)', 0);
 
             var spaceKey = this.game.input.keyboard.addKey(
                 Phaser.Keyboard.SPACEBAR);
 
             this.initTiles();
+            this.v = 200;
             this.timer = this.game.time.events.loop(780, this.addRowOfTiles, this);
 
             this.game.paused = true;
@@ -46,10 +52,13 @@ module BrickStep {
         }
 
         start() {
-            if (this.game.paused)
-                this.game.paused = false;
-            else
+            if (this.game.paused) {
+                this.game.paused = false
+                this.pauseText.setText('');
+            } else {
                 this.game.paused = true;
+                this.pauseText.setText('Press Space to Start');
+            }
         }
 
         addWhiteTile(x, y, v) {
@@ -95,9 +104,9 @@ module BrickStep {
             // the rolled number is the black tile, the others are white
             for (var i = 0; i < 4; i++)
                 if (i != black) {
-                    this.addWhiteTile(i * 120, -160, 200);
+                    this.addWhiteTile(i * 120, -160, this.v);
                 } else {
-                    this.addBlackTile(i * 120, -160, 200);
+                    this.addBlackTile(i * 120, -160, this.v);
                 }
         }
 
@@ -110,9 +119,9 @@ module BrickStep {
         }
 
         updateTimer() {
-            var minutes = Math.floor((this.game.time.time - this.starttime) / 60000) % 60;
-            var seconds = Math.floor((this.game.time.time - this.starttime) / 1000) % 60;
-            var milliseconds = Math.floor(this.game.time.time - this.starttime) % 100;
+            var minutes = Math.floor((this.game.time.time - this.startTime) / 60000) % 60;
+            var seconds = Math.floor((this.game.time.time - this.startTime) / 1000) % 60;
+            var milliseconds = Math.floor(this.game.time.time - this.startTime) % 100;
             //If any of the digits becomes a single digit number, pad it with a zero
             if (milliseconds < 10)
                 milliseconds = '0' + milliseconds;
