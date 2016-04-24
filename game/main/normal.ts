@@ -1,4 +1,5 @@
 module BrickStep {
+    import Key = Phaser.Key;
     export class NormalMode extends Phaser.State {
         tiles;
         timer;
@@ -12,7 +13,31 @@ module BrickStep {
         KText;
         maxTime;
 
+        KEY: {
+            L1 : Phaser.Key,
+            L2 : Phaser.Key,
+            L3 : Phaser.Key,
+            L4 : Phaser.Key
+        }
+
+        L1() {
+
+        }
+        L2() {
+
+        }
+        L3() {
+
+        }
+        L4() {
+
+        }
+
         preload() {
+            this.KEY.L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
+            this.KEY.L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
+            this.KEY.L3 = this.game.input.keyboard.addKey(Phaser.Keyboard.J);
+            this.KEY.L4 = this.game.input.keyboard.addKey(Phaser.Keyboard.K);
 
         }
 
@@ -128,9 +153,12 @@ module BrickStep {
         }
 
         updateTimer() {
-            var minutes = Math.floor((this.game.time.time - this.startTime) / 60000) % 60;
-            var seconds = Math.floor((this.game.time.time - this.startTime) / 1000) % 60;
-            var milliseconds = Math.floor(this.game.time.time - this.startTime) % 100;
+            let minutes: any;
+            let seconds: any;
+            let milliseconds: any;
+            minutes = Math.floor((this.game.time.time - this.startTime) / 60000) % 60;
+            seconds = Math.floor((this.game.time.time - this.startTime) / 1000) % 60;
+            milliseconds = Math.floor(this.game.time.time - this.startTime) % 100;
             //If any of the digits becomes a single digit number, pad it with a zero
             if (milliseconds < 10)
                 milliseconds = '0' + milliseconds;
