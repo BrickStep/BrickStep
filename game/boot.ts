@@ -14,6 +14,9 @@ module BrickStep {
             this.load.image('black', './assets/image/tile_b.png');
             this.load.image('white', './assets/image/tile_w.png');
             this.load.image('white_big', './assets/image/tile_w_b.png');
+            this.load.image('button_on', './assets/image/tile_w_on.png');
+            this.load.image('button_off', './assets/image/tile_w_off.png');
+
             //TODO: load resouces
             
         }
