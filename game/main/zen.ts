@@ -11,7 +11,7 @@ module BrickStep {
             this.game.state.start('menu',true,false);
         }
         update() {
-            
+           
         }
     }
 }
