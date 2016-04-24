@@ -10,6 +10,7 @@ module BrickStep {
         FText;
         JText;
         KText;
+        maxTime;
 
         preload() {
 
@@ -25,6 +26,7 @@ module BrickStep {
                 fill: "#3d3d3d"
             };
             this.startTime = this.game.time.time;
+            this.maxTime = this.startTime;
             this.timeText = this.game.add.text(200, 10, '00:00:00', style);
             this.pauseText = this.game.add.text(100, 300, 'Press Space to Start', style);
 
@@ -137,6 +139,17 @@ module BrickStep {
             if (minutes < 10)
                 minutes = '0' + minutes;
             this.timeText.setText(minutes + ':' + seconds + ':' + milliseconds);
+
+            if (this.game.time.time - this.maxTime > 3 * 1000) {
+                this.updateVelocity();
+            }
+        }
+
+        updateVelocity() {
+            this.maxTime = this.game.time.time;
+            this.v = this.v + 100;
+            this.timer.delay = Math.floor((160 * 1000/ this.v)) - 20;
+            this.tiles.addAll('body.velocity.y', 100);
         }
     }
 }
