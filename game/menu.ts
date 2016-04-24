@@ -14,29 +14,33 @@ module BrickStep {
         button_zen;
         button_setting;
         button_empty;
-        text_normal;
+        text;
 
         create() {
             //TODO: menu scene set up
-            this.button_normal = this.game.add.button(240, 0, 'white', this.startNormal, this, 2, 1, 0);
-            this.button_zen = this.game.add.button(0, 160, 'white', this.startZen, this);
-            this.button_setting = this.game.add.button(240, 320, 'white', this.startZen, this);
-            this.button_empty = this.game.add.button(0, 480,'white');
+            this.button_normal = this.game.add.button(240, 0, 'white_big',function () {this.game.state.start('normal', true, false)
+            }, this);
+            this.button_zen = this.game.add.button(0, 160, 'white_big', this.startZen, this);
+            this.button_setting = this.game.add.button(240, 320, 'white_big', this.startSetting, this);
+            this.button_empty = this.game.add.button(0, 480,'white_big');
 
             //setting texts
-            var style = {font: "32px Futura condensed", align: "center"};
-            this.text_normal= this.game.add.text(0, 0, "Normal", style);
+            var style = {font: "32px Futura condensed", align: "center", fill: "#000000"};
+            //this.text = this.game.add.text(300, 70, "Normal", style);
+            //this.text = this.game.add.text(90, 230, "Zen", style);
+            //this.text = this.game.add.text(300, 390, "Setting", style);
+
+
 
         }
-        
-        private startZen() {
+
+        startZen() {
             this.game.state.start('zen',true,false);
-            
         }
         
-        private startNormal() {
+        startNormal() {
+            console.log("hhhhhhh")
             this.game.state.start('normal',true,false);
-            
         }
         
         private startSetting(){

@@ -13,6 +13,7 @@ module BrickStep {
         private loadResouces() {
             this.load.image('black', './assets/image/tile_b.png');
             this.load.image('white', './assets/image/tile_w.png');
+            this.load.image('white_big', './assets/image/tile_w_b.png');
             //TODO: load resouces
             
         }
@@ -27,7 +28,7 @@ module BrickStep {
             
             
             //cache should not be clean ever
-            this.game.state.start('normal',true,false);
+            this.game.state.start('menu',true,false);
             
             
         }
