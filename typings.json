@@ -1,0 +1,7 @@
+{
+  "name": "BrickStep",
+  "version": false,
+  "dependencies": {
+    "requirejs": "registry:npm/requirejs#2.2.0+20160319062357"
+  }
+}
