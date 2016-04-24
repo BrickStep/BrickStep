@@ -19,11 +19,32 @@
 
 // }
 
-///<reference path='/game/game.ts/'/>
-
+/// <reference path="game/game/"/>
+/// <reference path="scripts/require.js" />
 
 window.onload = () => {
 
     var game = new BrickStep.Game;
+    loadScripts();
 
 };
+
+function loadScripts(){
+   var directory = ['game/','game/main/'];
+   var extension = '.js';
+   var gamefiles = ['game', 'boot', 'menu'];  
+   var mainfiles = ['normal','zen']
+    for (var file of gamefiles){ 
+       var path = directory[0] + file + extension; 
+       var script = document.createElement("script");
+       script.src = path;
+       document.body.appendChild(script);
+      }
+    for (var file of mainfiles){ 
+       var path = directory[1] + file + extension; 
+       var script = document.createElement("script");
+       script.src = path;
+       document.body.appendChild(script);
+      }
+ }
+
