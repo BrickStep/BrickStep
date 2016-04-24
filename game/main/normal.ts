@@ -2,6 +2,8 @@ module BrickStep {
     export class NormalMode extends Phaser.State {
         tiles;
         timer;
+        starttime;
+        timeText;
 
         preload() {
 
@@ -10,6 +12,14 @@ module BrickStep {
         create() {
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
+
+            var style = {
+                font: "32px Futura condensed",
+                align: "center",
+                fill: "#000000",
+            };
+            this.starttime = this.game.time.time;
+            this.timeText = this.game.add.text(200, 10, '00:00:00', style);
 
             var spaceKey = this.game.input.keyboard.addKey(
                 Phaser.Keyboard.SPACEBAR);
@@ -96,7 +106,21 @@ module BrickStep {
         }
 
         update() {
+            this.updateTimer();
+        }
 
+        updateTimer() {
+            var minutes = Math.floor((this.game.time.time - this.starttime) / 60000) % 60;
+            var seconds = Math.floor((this.game.time.time - this.starttime) / 1000) % 60;
+            var milliseconds = Math.floor(this.game.time.time - this.starttime) % 100;
+            //If any of the digits becomes a single digit number, pad it with a zero
+            if (milliseconds < 10)
+                milliseconds = '0' + milliseconds;
+            if (seconds < 10)
+                seconds = '0' + seconds;
+            if (minutes < 10)
+                minutes = '0' + minutes;
+            this.timeText.setText(minutes + ':' + seconds + ':' + milliseconds);
         }
     }
 }
