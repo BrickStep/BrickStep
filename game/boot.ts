@@ -11,8 +11,8 @@ module BrickStep {
         }
         
         private loadResouces() {
-            this.load.image('black', '../assets/image/tile_b.png');
-            this.load.image('white', '../assets/image/tile_w.png');
+            this.load.image('black', './assets/image/tile_b.png');
+            this.load.image('white', './assets/image/tile_w.png');
             //TODO: load resouces
             
         }
@@ -24,9 +24,10 @@ module BrickStep {
             this.input.maxPointers = 1;
             //pause the game if lost focus
             this.stage.disableVisibilityChange = false;
-
+            
+            
             //cache should not be clean ever
-            this.game.state.start('menu',true,false);
+            this.game.state.start('normal',true,false);
             
             
         }
