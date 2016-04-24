@@ -10,25 +10,39 @@ module BrickStep {
         create() {
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
+
+            var spaceKey = this.game.input.keyboard.addKey(
+                Phaser.Keyboard.SPACEBAR);
+
             this.initTiles();
-            this.timer = this.game.time.events.loop(800, this.addRowOfTiles, this);
+            this.timer = this.game.time.events.loop(802, this.addRowOfTiles, this);
+
+            this.game.paused = true;
+            spaceKey.onDown.add(this.start, this);
         }
 
         initTiles() {
             // random roll a number from 0 to 3
             // the rolled number is the black tile, the others are white
-            for (var j = - 1; j < 4; j++) {
+            for (var j = -1; j < 4; j++) {
                 var black = Math.floor(Math.random() * 4);
                 for (var i = 0; i < 4; i++)
                     if (i != black) {
-                        this.addWhiteTile(i * 120, j * 160);
+                        this.addWhiteTile(i * 120, j * 160, 200);
                     } else {
-                        this.addBlackTile(i * 120, j * 160);
+                        this.addBlackTile(i * 120, j * 160, 200);
                     }
             }
         }
 
-        addWhiteTile(x, y) {
+        start() {
+            if (this.game.paused)
+                this.game.paused = false;
+            else
+                this.game.paused = true;
+        }
+
+        addWhiteTile(x, y, v) {
             // Create a tile at the position x and y
             var tile = this.game.add.sprite(x, y, 'white');
 
@@ -38,13 +52,13 @@ module BrickStep {
 
             // Add velocity to the tile to make it move
             this.game.physics.arcade.enable(tile);
-            tile.body.velocity.y = 200;
+            tile.body.velocity.y = v;
 
             tile.events.onEnterBounds.add(this.destoryLisenter, tile);
         }
 
 
-        addBlackTile(x, y) {
+        addBlackTile(x, y, v) {
             // Create a tile at the position x and y
             var tile = this.game.add.sprite(x, y, 'black');
 
@@ -53,7 +67,7 @@ module BrickStep {
 
             // Add velocity to the tile to make it move
             this.game.physics.arcade.enable(tile);
-            tile.body.velocity.y = 200;
+            tile.body.velocity.y = v;
 
             tile.events.onEnterBounds.add(this.destoryLisenter, tile);
         }
@@ -71,9 +85,9 @@ module BrickStep {
             // the rolled number is the black tile, the others are white
             for (var i = 0; i < 4; i++)
                 if (i != black) {
-                    this.addWhiteTile(i * 120, -160);
+                    this.addWhiteTile(i * 120, -160, 200);
                 } else {
-                    this.addBlackTile(i * 120, -160);
+                    this.addBlackTile(i * 120, -160, 200);
                 }
         }
 
