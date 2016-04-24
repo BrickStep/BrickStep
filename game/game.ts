@@ -10,9 +10,11 @@ module BrickStep {
             this.state.add('menu',Menu,false);
             this.state.add('zen',ZenMode,false);
             this.state.add('normal',NormalMode,false);
+            this.state.add('setting', Setting, false);
+
             
             this.state.start('boot');
-            
+
         }
     }
     
