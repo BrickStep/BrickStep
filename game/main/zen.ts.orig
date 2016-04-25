@@ -79,7 +79,9 @@ module BrickStep {
 
             this.key = new BrickStep.KEY(L1, L2, L3, L4);
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
-            
+
+<<<<<<< Updated upstream
+=======
             this.drum1 = this.game.add.audio('drum1');
             this.drum2 = this.game.add.audio('drum2');
             this.drum3 = this.game.add.audio('drum3');
@@ -90,6 +92,7 @@ module BrickStep {
             this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(10000);
 
 
+>>>>>>> Stashed changes
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
 
@@ -100,8 +103,7 @@ module BrickStep {
             };
 
             this.score = 0;
-            this.scoreText = this.game.add.text(this.game.world.centerX, 20, '0', style);
-            this.scoreText.anchor = new Phaser.Point(0.5,0.5);
+            this.scoreText = this.game.add.text(200, 10, '0', style);
 
             this.DText = this.game.add.text(10, 600, 'D', style);
             this.FText = this.game.add.text(130, 600, 'F', style);
@@ -115,9 +117,7 @@ module BrickStep {
         private youDie() {
             console.log("YOU DIE");
             this.isLost = true;
-            this.loseGroup.show(this.scoreText.text);
-            var url = "/score?username=" + BrickStep.user + "&score=" + this.scoreText.text + "&mode=z";
-            $.get(url);
+            this.loseGroup.show(this.score);
         }
 
         private retry() {
@@ -127,9 +127,9 @@ module BrickStep {
         private initLosePage() {
             this.loseGroup = new BrickStep.LoseDialogGroup(this.game);
             this.loseGroup.visible = false;
-            let background = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
-            background.anchor = new Phaser.Point(0.5,0.5);
-            this.loseGroup.add(background);
+            let backgroud = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
+            backgroud.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(backgroud);
             let style = {
                 font: "120px Futura condensed",
                 align: "center",
@@ -147,7 +147,7 @@ module BrickStep {
             this.loseGroup.add(b1);
             this.loseGroup.add(b2);
 
-            this.loseGroup.init(statusText,background,b1, b2);
+            this.loseGroup.init(statusText,backgroud,b1, b2);
 
         }
 

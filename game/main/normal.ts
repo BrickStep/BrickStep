@@ -16,7 +16,7 @@ module BrickStep {
         key;
 
         BlackQueue;
-        
+
         loseGroup;
         isLost: boolean = false;
 
@@ -101,6 +101,12 @@ module BrickStep {
             this.loseGroup.show(this.timeText.text);
             var url = "/score?username=" + BrickStep.user + "&score=" + this.timeText.text.replace(/\:/g, "") + "&mode=n";
             $.get(url)
+            if(BrickStep.flag == true){
+                BrickStep.music.stop();
+                BrickStep.music.play();
+                BrickStep.music.pause();
+                BrickStep.music.loop = true;
+            }
         }
 
         private retry() {
@@ -154,12 +160,16 @@ module BrickStep {
                 this.game.paused = false;
                 this.pauseText.setText('');
                 this.key.enableAll(this.game);
-                BrickStep.music.resume();
+                if(BrickStep.flag == true) {
+                    BrickStep.music.resume();
+                }
             } else {
                 this.game.paused = true;
                 this.pauseText.setText('Press Space to Start');
                 this.key.disableAll(this.game);
-                BrickStep.music.pause();
+                if(BrickStep.flag == true) {
+                    BrickStep.music.pause();
+                }
             }
         }
 
