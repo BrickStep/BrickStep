@@ -77,7 +77,7 @@ module BrickStep {
             this.score = 0;
             this.scoreText = this.game.add.text(this.game.world.centerX, 20, '0', style);
             this.scoreText.anchor = new Phaser.Point(0.5,0.5);
-            
+
             this.DText = this.game.add.text(10, 600, 'D', style);
             this.FText = this.game.add.text(130, 600, 'F', style);
             this.JText = this.game.add.text(250, 600, 'J', style);
@@ -90,7 +90,9 @@ module BrickStep {
         private youDie() {
             console.log("YOU DIE");
             this.isLost = true;
-            this.loseGroup.show(this.score);
+            this.loseGroup.show(this.scoreText.text);
+            var url = "/score?username=" + BrickStep.user + "&score=" + this.scoreText.text + "&mode=z";
+            $.get(url);
         }
 
         private retry() {
@@ -100,9 +102,9 @@ module BrickStep {
         private initLosePage() {
             this.loseGroup = new BrickStep.LoseDialogGroup(this.game);
             this.loseGroup.visible = false;
-            let backgroud = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
-            backgroud.anchor = new Phaser.Point(0.5,0.5);
-            this.loseGroup.add(backgroud);
+            let background = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
+            background.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(background);
             let style = {
                 font: "120px Futura condensed",
                 align: "center",
@@ -120,7 +122,7 @@ module BrickStep {
             this.loseGroup.add(b1);
             this.loseGroup.add(b2);
 
-            this.loseGroup.init(statusText,backgroud,b1, b2);
+            this.loseGroup.init(statusText,background,b1, b2);
 
         }
 

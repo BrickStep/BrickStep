@@ -1,4 +1,3 @@
-
 module BrickStep {
     import Key = Phaser.Key;
     export class NormalMode extends Phaser.State {
@@ -17,9 +16,7 @@ module BrickStep {
         key;
 
         BlackQueue;
-
-        music;
-
+        
         loseGroup;
         isLost: boolean = false;
 
@@ -102,20 +99,20 @@ module BrickStep {
             console.log("YOU DIE");
             this.isLost = true;
             this.loseGroup.show(this.timeText.text);
+            var url = "/score?username=" + BrickStep.user + "&score=" + this.timeText.text.replace(/\:/g, "") + "&mode=n";
+            $.get(url)
         }
 
         private retry() {
             this.game.state.restart();
         }
-        
-
 
         private initLosePage() {
             this.loseGroup = new BrickStep.LoseDialogGroup(this.game);
             this.loseGroup.visible = false;
-            let backgroud = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
-            backgroud.anchor = new Phaser.Point(0.5,0.5);
-            this.loseGroup.add(backgroud);
+            let background = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
+            background.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(background);
             let style = {
                 font: "120px Futura condensed",
                 align: "center",
@@ -133,7 +130,7 @@ module BrickStep {
             this.loseGroup.add(b1);
             this.loseGroup.add(b2);
 
-            this.loseGroup.init(statusText,backgroud,b1, b2);
+            this.loseGroup.init(statusText,background,b1, b2);
 
         }
 
