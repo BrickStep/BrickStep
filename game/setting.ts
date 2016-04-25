@@ -18,7 +18,9 @@ module BrickStep {
             var style1 = {font: "64px Futura condensed", align: "center", fill: "#FFFFFF"};
             var style2 = {font: "64px Futura condensed", align: "center", fill: "#000000"};
 
-            this.text = this.game.add.text(28, 50, "Music", style1);
+            this.text = this.game.add.text(this.game.world.centerX / 2, this.game.world.centerY / 4, "Music", style1);
+            this.text.anchor = new Phaser.Point(0.5,0.5);
+
             this.button_music = this.game.add.button(240, 0, 'button_off', this.settingMusic, this);
             this.button_user = this.game.add.button(240, 160, 'black_big', this.settingUser, this);
             this.button1 = this.game.add.button(0, 160, 'white_big', this.settingUser, this);
