@@ -6,6 +6,7 @@ Spring 2016 CS 252 Final Project
 ## Setup
 1. install npm which comes with node.js
 
+   * Recommanded: install typings globally , runs `npm install typings -g`
 2. under project directory runs
 
         npm install
