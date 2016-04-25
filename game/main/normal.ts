@@ -164,7 +164,6 @@ module BrickStep {
         private destoryLisenter(tile) {
             console.log("addedListener")
             // Automatically kill the pipe when it's no longer visible
-
             tile.outOfBoundsKill = true;
         }
 
