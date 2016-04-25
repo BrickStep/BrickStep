@@ -138,7 +138,7 @@ module BrickStep {
 
         }
 
-        initTiles() {
+        private initTiles() {
             // random roll a number from 0 to 3
             // the rolled number is the black tile, the others are white
             for (var j = 3; j >= -1; j--) {
@@ -152,7 +152,8 @@ module BrickStep {
             }
         }
 
-        start() {
+        private start() {
+            if (this.isLost) return;
             if (this.game.paused) {
                 this.game.paused = false;
                 this.pauseText.setText('');
@@ -166,7 +167,7 @@ module BrickStep {
             }
         }
 
-        addWhiteTile(x, y, v) {
+        private addWhiteTile(x, y, v) {
             // Create a tile at the position x and y
             var tile = this.game.add.sprite(x, y, 'white');
 
@@ -184,7 +185,7 @@ module BrickStep {
         }
 
 
-        addBlackTile(x, y, v,index:number) {
+        private addBlackTile(x, y, v,index:number) {
             // Create a tile at the position x and y
             let tile= new BrickStep.BlackTile(this.game,x, y, 'black');
             this.game.add.existing(tile);
@@ -218,7 +219,7 @@ module BrickStep {
             //this.BlackQueue.popOne();
         }
 
-        addRowOfTiles() {
+        private addRowOfTiles() {
             // random roll a number from 0 to 3
             var black = Math.floor(Math.random() * 4);
 
@@ -231,7 +232,7 @@ module BrickStep {
                 }
         }
 
-        backToMenu() {
+        private backToMenu() {
             this.game.state.start('menu', true, false);
         }
 
@@ -242,7 +243,7 @@ module BrickStep {
             }
         }
 
-        updateTimer() {
+        private updateTimer() {
             if (this.isLost) return;
             let minutes: any;
             let seconds: any;
@@ -262,8 +263,7 @@ module BrickStep {
 
         }
 
-        updateVelocity() {
-            if (this.isLost) return;
+        private updateVelocity() {
             this.maxTime = this.game.time.time;
             this.tiles.addAll('body.velocity.y', 20);
             this.v = this.v + 20;

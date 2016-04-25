@@ -127,7 +127,7 @@ module BrickStep {
 
         }
 
-        initTiles() {
+        private initTiles() {
             // random roll a number from 0 to 3
             // the rolled number is the black tile, the others are white
             for (var j = 3; j > -1; j--) {
@@ -141,7 +141,7 @@ module BrickStep {
             }
         }
 
-        addWhiteTile(x, y) {
+        private addWhiteTile(x, y) {
             // Create a tile at the position x and y
             var tile = this.game.add.sprite(x, y, 'white');
 
@@ -154,7 +154,7 @@ module BrickStep {
         }
 
 
-        addBlackTile(x, y, index:number) {
+        private addBlackTile(x, y, index:number) {
             // Create a tile at the position x and y
             let tile = new BrickStep.BlackTile(this.game, x, y, 'black');
             this.game.add.existing(tile);
@@ -184,7 +184,7 @@ module BrickStep {
             //this.BlackQueue.popOne();
         }
 
-        addRowOfTiles() {
+        private addRowOfTiles() {
             this.score++;
             // random roll a number from 0 to 3
             var black = Math.floor(Math.random() * 4);
@@ -198,7 +198,7 @@ module BrickStep {
                 }
         }
 
-        backToMenu() {
+        private backToMenu() {
             this.game.state.start('menu', true, false);
         }
 
