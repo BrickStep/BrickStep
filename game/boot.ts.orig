@@ -1,5 +1,5 @@
 module BrickStep {
-    export var flag: boolean = false;//flag = true, have music, ==false, no music
+
     export class KEY {
         L : Array<Phaser.Key>;
         
@@ -153,11 +153,14 @@ module BrickStep {
             this.load.image('button_on', './assets/image/tile_w_on.png');
             this.load.image('button_off', './assets/image/tile_w_off.png');
             this.load.audio('backmusic', './assets/music/111.mp3')
+<<<<<<< Updated upstream
+=======
             this.load.audio('drum1', './assets/music/drum/drum1.mp3');
             this.load.audio('drum2', './assets/music/drum/drum2.mp3');
             this.load.audio('drum3', './assets/music/drum/drum3.mp3');
             this.load.audio('drum4', './assets/music/drum/drum4.mp3');
 
+>>>>>>> Stashed changes
 
             //TODO: load resouces
 
