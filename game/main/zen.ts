@@ -17,6 +17,11 @@ module BrickStep {
         loseGroup;
         isLost: boolean = false;
 
+        drum1;
+        drum2;
+        drum3;
+        drum4;
+
         L1() {
             this.LDown(0);
         }
@@ -41,7 +46,17 @@ module BrickStep {
                 // console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
             } else {
                 if (this.isLost) return;
-
+                if(BrickStep.flag == true) {
+                    if (index == 0) {
+                        this.drum1.play();
+                    } else if (index == 1) {
+                        this.drum2.play();
+                    } else if (index == 2) {
+                        this.drum3.play();
+                    } else if (index == 3) {
+                        this.drum4.play();
+                    }
+                }
                 this.addRowOfTiles();
                 this.tiles.addAll('y', 160);
                 //console.log("You Win " + toBe.indexInRow);
@@ -65,6 +80,19 @@ module BrickStep {
             this.key = new BrickStep.KEY(L1, L2, L3, L4);
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
 
+<<<<<<< Updated upstream
+=======
+            this.drum1 = this.game.add.audio('drum1');
+            this.drum2 = this.game.add.audio('drum2');
+            this.drum3 = this.game.add.audio('drum3');
+            this.drum4 = this.game.add.audio('drum4');
+
+
+
+            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(10000);
+
+
+>>>>>>> Stashed changes
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
 
