@@ -102,6 +102,7 @@ module BrickStep {
                 BrickStep.music.stop();
                 BrickStep.music.play();
                 BrickStep.music.pause();
+                BrickStep.music.loop = true;
             }
         }
 

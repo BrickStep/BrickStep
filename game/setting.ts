@@ -36,6 +36,7 @@ module BrickStep {
                 BrickStep.music = this.game.add.audio('backmusic');
                 BrickStep.music.play();
                 BrickStep.music.pause();
+                BrickStep.music.loop = true;
                 BrickStep.flag = true;
             } else {
                 this.button_music = this.game.add.button(240, 0, 'button_off', this.settingMusic, this);
