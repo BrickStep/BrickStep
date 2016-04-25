@@ -19,7 +19,6 @@ module BrickStep {
         BlackQueue;
 
         loseGroup;
-
         isLost: boolean = false;
 
 
