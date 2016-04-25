@@ -18,8 +18,6 @@ module BrickStep {
 
         BlackQueue;
 
-        music;
-
         loseGroup;
         isLost: boolean = false;
 
@@ -100,6 +98,11 @@ module BrickStep {
             console.log("YOU DIE");
             this.isLost = true;
             this.loseGroup.show(this.timeText.text);
+            if(BrickStep.flag == true){
+                BrickStep.music.stop();
+                BrickStep.music.play();
+                BrickStep.music.pause();
+            }
         }
 
         private retry() {
@@ -155,12 +158,16 @@ module BrickStep {
                 this.game.paused = false;
                 this.pauseText.setText('');
                 this.key.enableAll(this.game);
-                BrickStep.music.resume();
+                if(BrickStep.flag == true) {
+                    BrickStep.music.resume();
+                }
             } else {
                 this.game.paused = true;
                 this.pauseText.setText('Press Space to Start');
                 this.key.disableAll(this.game);
-                BrickStep.music.pause();
+                if(BrickStep.flag == true) {
+                    BrickStep.music.pause();
+                }
             }
         }
 

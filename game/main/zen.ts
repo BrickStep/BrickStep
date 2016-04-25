@@ -79,9 +79,7 @@ module BrickStep {
 
             this.key = new BrickStep.KEY(L1, L2, L3, L4);
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
-
-<<<<<<< Updated upstream
-=======
+            
             this.drum1 = this.game.add.audio('drum1');
             this.drum2 = this.game.add.audio('drum2');
             this.drum3 = this.game.add.audio('drum3');
@@ -92,7 +90,6 @@ module BrickStep {
             this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(10000);
 
 
->>>>>>> Stashed changes
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
 
