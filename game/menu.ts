@@ -29,6 +29,7 @@ module BrickStep {
             this.text = this.game.add.text(300, 70, "Normal", style);
             this.text = this.game.add.text(90, 230, "Zen", style);
             this.text = this.game.add.text(300, 390, "Setting", style);
+            
         }
 
         startZen() {
