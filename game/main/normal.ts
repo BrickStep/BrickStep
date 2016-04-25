@@ -38,6 +38,7 @@ module BrickStep {
         }
 
         LDown(index: number) {
+            if (this.game.paused) return;
             let toBe = this.BlackQueue.peekOne();
 
 
@@ -52,7 +53,7 @@ module BrickStep {
         }
 
         preload() {
-
+            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(5000);
         }
 
         create() {
@@ -64,10 +65,6 @@ module BrickStep {
 
             this.key = new BrickStep.KEY(L1,L2,L3,L4);
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
-
-            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(100);
-
-
 
             this.game.stage.backgroundColor = '#ffffff';
             this.tiles = this.game.add.group();
