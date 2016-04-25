@@ -20,6 +20,7 @@ module BrickStep {
 
 
 
+
         L1() {
             this.LDown(0);
         }
@@ -34,10 +35,16 @@ module BrickStep {
         }
 
         LDown(index: number) {
-            let toBe = this.BlackQueue.popOne().indexInRow;
-            if (toBe != index) {
+            let toBe = this.BlackQueue.peekOne();
 
-                console.log("YOU LOSE At DOWN " + toBe + " not as " + index);
+
+            if (toBe.indexInRow != index) {
+
+                console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
+            } else {
+                console.log("You Win " + toBe.indexInRow);
+                toBe.fadeOutToGrey();
+                this.BlackQueue.popOne();
             }
         }
 
@@ -165,7 +172,7 @@ module BrickStep {
             if (tile === this.BlackQueue.peekOne()){
                 console.log("YOU LOSE");
             }
-            this.BlackQueue.popOne();
+            //this.BlackQueue.popOne();
         }
 
         addRowOfTiles() {

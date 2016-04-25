@@ -60,6 +60,7 @@ module BrickStep {
         peekOne() : T {
             if (this.cap > 0) {
                 //console.log(this.queue[this.toExact])
+                console.log("to peek " + this.toExact);
                 return this.queue[this.toExact];
             } else {
                 console.error("queue underflow")
@@ -69,6 +70,7 @@ module BrickStep {
         popOne() : T {
             if (this.toExact >= this.max)
                 this.toExact = this.toExact % this.max;
+            console.log("to Extact " + this.toExact);
             if (this.cap > 0) {
                 this.cap--;
                 return this.queue[this.toExact++];
@@ -84,6 +86,10 @@ module BrickStep {
         indexInRow: number;
         constructor(game,x,y,key) {
             super(game, x, y, key);
+        }
+        
+        fadeOutToGrey() {
+            this.game.add.tween(this).to({alpha: 0.2}, 100, "Linear", true);
         }
     }
     
