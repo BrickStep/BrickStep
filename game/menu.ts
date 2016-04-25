@@ -34,7 +34,6 @@ module BrickStep {
 
             this.text = this.game.add.text(this.game.world.centerX * 3 / 2, this.game.world.centerY * 5 / 4, "Setting", style);
             this.text.anchor = new Phaser.Point(0.5,0.5);
-
         }
 
         startZen() {
