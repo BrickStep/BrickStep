@@ -1,5 +1,5 @@
 module BrickStep {
-    export var flag: boolean = true; //flag = true, have music, ==false, no music
+
     export class KEY {
         L : Array<Phaser.Key>;
         

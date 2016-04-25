@@ -103,9 +103,6 @@ module BrickStep {
             console.log("YOU DIE");
             this.isLost = true;
             this.loseGroup.show(this.timeText.text);
-            BrickStep.music.stop();
-            BrickStep.music.play();
-            BrickStep.music.pause();
         }
 
         private retry() {
