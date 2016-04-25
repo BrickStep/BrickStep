@@ -18,6 +18,7 @@ module BrickStep {
 
         create() {
             //TODO: menu scene set up
+            this.game.stage.backgroundColor = '#000000';
             this.button_normal = this.game.add.button(240, 0, 'white_big',this.startNormal, this);
             this.button_zen = this.game.add.button(0, 160, 'white_big', this.startZen, this);
             this.button_setting = this.game.add.button(240, 320, 'white_big', this.startSetting, this);

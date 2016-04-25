@@ -18,7 +18,9 @@ module BrickStep {
 
         BlackQueue;
 
+        loseGroup;
 
+        isLost: boolean = false;
 
 
         L1() {
@@ -39,10 +41,10 @@ module BrickStep {
 
 
             if (toBe.indexInRow != index) {
-
-                console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
+                this.youDie();
+               // console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
             } else {
-                console.log("You Win " + toBe.indexInRow);
+                //console.log("You Win " + toBe.indexInRow);
                 toBe.fadeOutToGrey();
                 this.BlackQueue.popOne();
             }
@@ -53,8 +55,7 @@ module BrickStep {
         }
 
         create() {
-
-
+            this.isLost = false;
             let L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
             let L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
             let L3 = this.game.input.keyboard.addKey(Phaser.Keyboard.J);
@@ -62,7 +63,6 @@ module BrickStep {
 
             this.key = new BrickStep.KEY(L1,L2,L3,L4);
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
-
 
             this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(100);
 
@@ -95,6 +95,46 @@ module BrickStep {
 
             this.game.paused = true;
             spaceKey.onDown.add(this.start, this);
+            this.initLosePage();
+        }
+
+        private youDie() {
+            console.log("YOU DIE");
+            this.isLost = true;
+            this.loseGroup.show(this.timeText.text);
+        }
+
+        private retry() {
+            this.game.state.restart();
+        }
+        
+
+
+        private initLosePage() {
+            this.loseGroup = new BrickStep.LoseDialogGroup(this.game);
+            this.loseGroup.visible = false;
+            let backgroud = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
+            backgroud.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(backgroud);
+            let style = {
+                font: "120px Futura condensed",
+                align: "center",
+                fill:"#000000"
+            };
+            let statusText = new Phaser.Text(this.game,240, 275, '', style);
+            statusText.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(statusText);
+            //let b1 = new Phaser.Button(this.game,120,573,'button_tryAgain',this.retry,this,1,0,2,0);
+            let b1 = new Phaser.Button(this.game,120,573,'button_tryAgain',this.retry,this,1,0,2,0);
+            let b2 = new Phaser.Button(this.game,360,573,'button_menu',this.backToMenu,this,1,0,2,0);
+            b1.anchor = new Phaser.Point(0.5,0.5);
+            b2.anchor = new Phaser.Point(0.5,0.5);
+            //this.game.add.existing(b1);
+            this.loseGroup.add(b1);
+            this.loseGroup.add(b2);
+
+            this.loseGroup.init(statusText,backgroud,b1, b2);
+
         }
 
         initTiles() {
@@ -169,7 +209,8 @@ module BrickStep {
 
         private blackTileKillListener(tile) {
             if (tile === this.BlackQueue.peekOne()){
-                console.log("YOU LOSE");
+                //console.log("YOU LOSE");
+                this.youDie();
             }
             //this.BlackQueue.popOne();
         }
@@ -199,6 +240,7 @@ module BrickStep {
         }
 
         updateTimer() {
+            if (this.isLost) return;
             let minutes: any;
             let seconds: any;
             let milliseconds: any;
@@ -218,6 +260,7 @@ module BrickStep {
         }
 
         updateVelocity() {
+            if (this.isLost) return;
             this.maxTime = this.game.time.time;
             this.tiles.addAll('body.velocity.y', 20);
             this.v = this.v + 20;
