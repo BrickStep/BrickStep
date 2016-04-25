@@ -38,6 +38,7 @@ module BrickStep {
         }
 
         LDown(index: number) {
+            if (this.game.paused) return;
             let toBe = this.BlackQueue.peekOne();
 
 
