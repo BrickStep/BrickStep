@@ -1,6 +1,7 @@
 module BrickStep {
     export var music: Phaser.Sound;
     export class Setting extends Phaser.State {
+
         preload() {
 
         }
@@ -18,6 +19,7 @@ module BrickStep {
 
             if(BrickStep.flag == false) {
                 this.button_music = this.game.add.button(240, 0, 'button_off', this.settingMusic, this);
+
             } else {
                 this.button_music = this.game.add.button(240, 0, 'button_on', this.settingMusic, this);
             }
@@ -40,15 +42,9 @@ module BrickStep {
             } else {
                 this.button_music = this.game.add.button(240, 0, 'button_off', this.settingMusic, this);
                 BrickStep.flag = false;
-                this.removeMusic();
-
             }
-
         }
 
-        private removeMusic(){
-            BrickStep.music.destroy();
-        }
         backToMenu() {
             this.game.state.start('menu',true,false);
         }

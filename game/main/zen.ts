@@ -66,7 +66,7 @@ module BrickStep {
             this.key.addListeners(this.L1, this.L2, this.L3, this.L4, this);
 
 
-            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(100);
+            this.BlackQueue = new BrickStep.Queue<BrickStep.BlackTile>(10000);
 
 
             this.game.stage.backgroundColor = '#ffffff';
