@@ -194,7 +194,7 @@ module BrickStep {
 
         update() {
             this.updateTimer();
-            if (this.game.time.time - this.maxTime > 3 * 1000) {
+            if (this.game.time.time - this.maxTime > 2 * 1000) {
                 this.updateVelocity();
             }
         }
@@ -220,8 +220,8 @@ module BrickStep {
 
         updateVelocity() {
             this.maxTime = this.game.time.time;
-            this.tiles.addAll('body.velocity.y', 100);
-            this.v = this.v + 100;
+            this.tiles.addAll('body.velocity.y', 20);
+            this.v = this.v + 20;
             this.timer.delay = Math.floor((160 * 1000/ this.v)) - 20;
         }
     }
