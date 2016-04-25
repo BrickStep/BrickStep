@@ -26,10 +26,15 @@ module BrickStep {
 
             //setting texts
             var style = {font: "32px Futura condensed", align: "center", fill: "#000000"};
-            this.text = this.game.add.text(300, 70, "Normal", style);
-            this.text = this.game.add.text(90, 230, "Zen", style);
-            this.text = this.game.add.text(300, 390, "Setting", style);
-            
+            this.text = this.game.add.text(this.game.world.centerX * 3 / 2, this.game.world.centerY / 4, "Normal", style);
+            this.text.anchor = new Phaser.Point(0.5,0.5);
+
+            this.text = this.game.add.text(this.game.world.centerX / 2, this.game.world.centerY * 3 / 4, "Zen", style);
+            this.text.anchor = new Phaser.Point(0.5,0.5);
+
+            this.text = this.game.add.text(this.game.world.centerX * 3 / 2, this.game.world.centerY * 5 / 4, "Setting", style);
+            this.text.anchor = new Phaser.Point(0.5,0.5);
+
         }
 
         startZen() {

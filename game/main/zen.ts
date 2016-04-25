@@ -75,8 +75,9 @@ module BrickStep {
             };
 
             this.score = 0;
-            this.scoreText = this.game.add.text(200, 10, '0', style);
-
+            this.scoreText = this.game.add.text(this.game.world.centerX, 20, '0', style);
+            this.scoreText.anchor = new Phaser.Point(0.5,0.5);
+            
             this.DText = this.game.add.text(10, 600, 'D', style);
             this.FText = this.game.add.text(130, 600, 'F', style);
             this.JText = this.game.add.text(250, 600, 'J', style);

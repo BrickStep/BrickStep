@@ -76,8 +76,10 @@ module BrickStep {
             };
             this.startTime = this.game.time.time;
             this.maxTime = this.startTime;
-            this.timeText = this.game.add.text(200, 10, '00:00:00', style);
-            this.pauseText = this.game.add.text(100, 300, 'Press Space to Start', style);
+            this.timeText = this.game.add.text(this.game.world.centerX, 20, '00:00:00', style);
+            this.timeText.anchor = new Phaser.Point(0.5,0.5);
+            this.pauseText = this.game.add.text(this.game.world.centerX, 300, 'Press Space to Start', style);
+            this.pauseText.anchor = new Phaser.Point(0.5,0.5);
 
             this.DText = this.game.add.text(10, 600, 'D', style);
             this.FText = this.game.add.text(130, 600, 'F', style);
