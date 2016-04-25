@@ -14,6 +14,8 @@ module BrickStep {
         key;
         BlackQueue;
 
+        loseGroup;
+        isLost: boolean = false;
 
         L1() {
             this.LDown(0);
@@ -34,14 +36,15 @@ module BrickStep {
         LDown(index:number) {
             let toBe = this.BlackQueue.peekOne();
 
-
             if (toBe.indexInRow != index) {
-
-                console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
+                this.youDie();
+                // console.log("YOU LOSE At DOWN " + toBe.indexInRow + " not as " + index);
             } else {
+                if (this.isLost) return;
+
                 this.addRowOfTiles();
                 this.tiles.addAll('y', 160);
-                console.log("You Win " + toBe.indexInRow);
+                //console.log("You Win " + toBe.indexInRow);
                 toBe.fadeOutToGrey();
                 this.BlackQueue.popOne();
             }
@@ -52,7 +55,7 @@ module BrickStep {
         }
 
         create() {
-
+            this.isLost = false;
 
             let L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
             let L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
@@ -84,6 +87,43 @@ module BrickStep {
             this.KText = this.game.add.text(370, 600, 'K', style);
 
             this.initTiles();
+            this.initLosePage();
+        }
+
+        private youDie() {
+            console.log("YOU DIE");
+            this.isLost = true;
+            this.loseGroup.show(this.score);
+        }
+
+        private retry() {
+            this.game.state.restart();
+        }
+
+        private initLosePage() {
+            this.loseGroup = new BrickStep.LoseDialogGroup(this.game);
+            this.loseGroup.visible = false;
+            let backgroud = new Phaser.Sprite(this.game,this.game.world.centerX,this.game.world.centerY,'youLose');
+            backgroud.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(backgroud);
+            let style = {
+                font: "120px Futura condensed",
+                align: "center",
+                fill:"#000000"
+            };
+            let statusText = new Phaser.Text(this.game,240, 275, '', style);
+            statusText.anchor = new Phaser.Point(0.5,0.5);
+            this.loseGroup.add(statusText);
+            //let b1 = new Phaser.Button(this.game,120,573,'button_tryAgain',this.retry,this,1,0,2,0);
+            let b1 = new Phaser.Button(this.game,120,573,'button_tryAgain',this.retry,this,1,0,2,0);
+            let b2 = new Phaser.Button(this.game,360,573,'button_menu',this.backToMenu,this,1,0,2,0);
+            b1.anchor = new Phaser.Point(0.5,0.5);
+            b2.anchor = new Phaser.Point(0.5,0.5);
+            //this.game.add.existing(b1);
+            this.loseGroup.add(b1);
+            this.loseGroup.add(b2);
+
+            this.loseGroup.init(statusText,backgroud,b1, b2);
 
         }
 

@@ -60,7 +60,7 @@ module BrickStep {
         peekOne() : T {
             if (this.cap > 0) {
                 //console.log(this.queue[this.toExact])
-                console.log("to peek " + this.toExact);
+                //console.log("to peek " + this.toExact);
                 return this.queue[this.toExact];
             } else {
                 console.error("queue underflow")
@@ -70,7 +70,7 @@ module BrickStep {
         popOne() : T {
             if (this.toExact >= this.max)
                 this.toExact = this.toExact % this.max;
-            console.log("to Extact " + this.toExact);
+            //console.log("to Extact " + this.toExact);
             if (this.cap > 0) {
                 this.cap--;
                 return this.queue[this.toExact++];
@@ -93,6 +93,49 @@ module BrickStep {
         }
     }
     
+    export class LoseDialogGroup extends Phaser.Group {
+        statusText: Phaser.Text;
+        backgroud: Phaser.Sprite;
+        button_Try: Phaser.Button;
+        button_Menu: Phaser.Button;
+        outTween: Phaser.Tween;
+
+        constructor(game: Phaser.Game) {
+            super(game);
+            this.outTween = new Phaser.Tween(this,this.game,this.game.tweens).to({x:1,y:1}, 1000, "Linear", false);
+            //this.game.add.existing(this.outTween);
+        }
+        init(text: Phaser.Text, back: Phaser.Sprite, b1: Phaser.Button, b2: Phaser.Button) {
+            this.statusText = text;
+            this.backgroud = back;
+            this.button_Try = b1;
+            this.button_Menu = b2;
+            this.x = 0.1;
+            this.y = 0.1;
+            this.alpha = 0.9;
+            //b1.input.enabled = false;
+            //b2.input.enabled = false;
+
+        }
+        
+        show(score: string) {
+            this.game.add.existing(this);
+            this.statusText.setText(score);
+            this.button_Menu.input.enabled = true;
+            this.button_Try.input.enabled = true;
+
+            this.visible = true;
+            console.log("add");
+            //this.game.add.existing(this.outTween);
+
+            this.outTween.start();
+            
+            
+        }
+        
+        
+    }
+    
     export class Boot extends Phaser.State {
         constructor() {
             super();
@@ -112,7 +155,12 @@ module BrickStep {
             this.load.audio('backmusic', './assets/music/111.mp3')
 
             //TODO: load resouces
-            
+
+            this.load.spritesheet('button_tryAgain','./assets/image/button/buttonTryAgain.png',163,67,3);
+            this.load.spritesheet('button_menu','./assets/image/button/buttonMenu.png',163,67,3);
+
+            this.load.image('youLose', './assets/image/youLose.png');
+
         }
 
         create() {
