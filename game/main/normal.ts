@@ -18,6 +18,7 @@ module BrickStep {
 
         BlackQueue;
 
+        music;
 
 
 
@@ -116,10 +117,12 @@ module BrickStep {
                 this.game.paused = false;
                 this.pauseText.setText('');
                 this.key.enableAll(this.game);
+                BrickStep.music.resume();
             } else {
                 this.game.paused = true;
                 this.pauseText.setText('Press Space to Start');
                 this.key.disableAll(this.game);
+                BrickStep.music.pause();
             }
         }
 
