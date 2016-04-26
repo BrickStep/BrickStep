@@ -21,6 +21,7 @@ module BrickStep {
 
         loseGroup;
         isLost: boolean = false;
+        isPush: boolean = false;
 
 
         L1() {
@@ -57,6 +58,7 @@ module BrickStep {
 
         create() {
             this.isLost = false;
+            this.isPush = false;
             let L1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
             let L2 = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
             let L3 = this.game.input.keyboard.addKey(Phaser.Keyboard.J);
@@ -106,14 +108,17 @@ module BrickStep {
             console.log("YOU DIE");
             this.isLost = true;
             this.loseGroup.show(this.timeText.text);
-            var url = "/score?username=" + BrickStep.user + "&score=" + this.timeText.text + "&mode=n";
-            $.get(url);
             if(BrickStep.flag == true){
                 BrickStep.music.stop();
                 BrickStep.music.play();
                 BrickStep.music.pause();
                 BrickStep.music.loop = true;
             }
+            if (this.isPush) return;
+            this.isPush = true;
+            var url = "/score?username=" + BrickStep.user + "&score=" + this.timeText.text + "&mode=n";
+            $.get(url);
+
         }
 
         private retry() {
