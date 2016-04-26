@@ -1,6 +1,75 @@
 module BrickStep {
     export var music: Phaser.Sound;
     export var user: string = "user";
+    export var randomName =
+        ['alligator',
+            'anteater',
+            'armadillo',
+            'auroch',
+            'axolotl',
+            'badger',
+            'bat',
+            'beaver',
+            'buffalo',
+            'camel',
+            'chameleon',
+            'cheetah',
+            'chipmunk',
+            'chinchilla',
+            'chupacabra',
+            'cormorant',
+            'coyote',
+            'crow',
+            'dingo',
+            'dinosaur',
+            'dolphin',
+            'duck',
+            'elephant',
+            'ferret',
+            'fox',
+            'frog',
+            'giraffe',
+            'gopher',
+            'grizzly',
+            'hedgehog',
+            'hippo',
+            'hyena',
+            'jackal',
+            'ibex',
+            'ifrit',
+            'iguana',
+            'koala',
+            'kraken',
+            'lemur',
+            'leopard',
+            'liger',
+            'llama',
+            'manatee',
+            'mink',
+            'monkey',
+            'narwhal',
+            'nyan cat',
+            'orangutan',
+            'otter',
+            'panda',
+            'penguin',
+            'platypus',
+            'python',
+            'pumpkin',
+            'quagga',
+            'rabbit',
+            'raccoon',
+            'rhino',
+            'sheep',
+            'shrew',
+            'skunk',
+            'slow loris',
+            'squirrel',
+            'turtle',
+            'walrus',
+            'wolf',
+            'wolverine',
+            'wombat'];
     export var flag: boolean = false;//flag = true, have music, ==false, no music
     export class KEY {
         L : Array<Phaser.Key>;
@@ -146,6 +215,7 @@ module BrickStep {
         preload() {
             //load resouces
             this.loadResouces();
+            BrickStep.user = "anonymous " + randomName[Math.floor(Math.random()*randomName.length)];
         }
         
         private loadResouces() {
