@@ -107,7 +107,7 @@ module BrickStep {
             this.isLost = true;
             this.loseGroup.show(this.timeText.text);
             var url = "/score?username=" + BrickStep.user + "&score=" + this.timeText.text + "&mode=n";
-            $.get(url)
+            $.get(url);
             if(BrickStep.flag == true){
                 BrickStep.music.stop();
                 BrickStep.music.play();
